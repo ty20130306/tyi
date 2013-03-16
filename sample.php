@@ -11,7 +11,7 @@ $htmlOutputCfg = array(
 TysOutput::initTypeCfg(TysOutput::TYPE_HTML, $htmlOutputCfg);
 
 // step 2. configure your log dir 
-Tyi_Helper_Log::init(your/dir/to/log/runtime, your/dir/to/log/action);
+TyiHelperLog::init(your/dir/to/log/runtime, your/dir/to/log/action);
 
 // step 3. run it
 Tyi::run(your/dir/to/tys);

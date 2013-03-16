@@ -1,6 +1,6 @@
 <?php
 
-class Tyi_Helper_Log {
+class TyiHelperLog {
 	const RUNTIME_LEVEL_FATAL = 0x01;
 	const RUNTIME_LEVEL_ERROR = 0x02;
 	const RUNTIME_LEVEL_WARNING = 0x03;
@@ -26,7 +26,7 @@ class Tyi_Helper_Log {
 	}
 	
 	static public function runtime($msg, $level){
-		if( ! self::_seriousEnoughToLog($level)){
+		if( ! self::seriousEnoughToLog($level)){
 			return;
 		}
 		
@@ -49,7 +49,7 @@ class Tyi_Helper_Log {
 				break;
 		}
 		$data .= ']' . $msg . "\n\n";
-		self::_write(self::$_runtimeLogDir, 'rt', $data, $level);
+		self::write(self::$_runtimeLogDir, 'rt', $data, $level);
 	}
 
 	static public function action($owner, $type, $extra = null){
@@ -57,10 +57,10 @@ class Tyi_Helper_Log {
 		if(isset($extra))
 			$data .= '|' . $extra . "\n";
 
-		self::_write(self::$_actionLogDir, 'act', $data);
+		self::write(self::$_actionLogDir, 'act', $data);
 	}
 
-	static private function _seriousEnoughToLog($level){
+	static private function seriousEnoughToLog($level){
 		if($level <= self::$_runtimeLevel){
 			return true;
 		} else {
@@ -68,7 +68,7 @@ class Tyi_Helper_Log {
 		}
 	}
 	
-	static private function _write($dir, $prefix, $msg){
+	static private function write($dir, $prefix, $msg){
 		$filename = $prefix . '_' . date('Ymd') . '.log';
 		$fp = fopen($dir . '/' . $filename, 'a');
 		if($fp){
