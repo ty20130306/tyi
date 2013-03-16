@@ -49,8 +49,6 @@ class Tyi{
 		} catch (TysException $e){
 			$tysOutput = $e->getTysOutput();
 			TyiHelperLog::runtime($e->getMessage(), TyiHelperLog::RUNTIME_LEVEL_ERROR);
-		}catch (Exception $e){
-			TyiHelperLog::runtime($e->getMessage(), TyiHelperLog::RUNTIME_LEVEL_ERROR);
 		}
 		
 		// step 4. output
