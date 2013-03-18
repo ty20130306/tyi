@@ -1,6 +1,6 @@
 <?php
 
-class TyiHelperLog {
+class TyiLog {
 	const RUNTIME_LEVEL_FATAL = 0x01;
 	const RUNTIME_LEVEL_ERROR = 0x02;
 	const RUNTIME_LEVEL_WARNING = 0x03;

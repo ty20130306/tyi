@@ -2,7 +2,7 @@
 require_once __DIR__ . '/input.php';
 require_once __DIR__ . '/output.php';
 require_once __DIR__ . '/tys.php';
-require_once __DIR__ . '/helper/log.php';
+require_once __DIR__ . '/log.php';
 
 class TyiException extends Exception{
 	
@@ -14,6 +14,19 @@ class Tyi{
 	
 	public static function input($name, $default = null){
 		return self::$_inputHandler->get($name, $default);
+	}
+	
+	public static function initSmartyCfg($tplDir, $compileDir){
+		$smartyCfg = array(
+			'template_dir'	=> $tplDir,
+			'compile_dir'	=> $compileDir
+		);
+		
+		TysOutput::initTypeCfg(TysOutput::TYPE_HTML, $smartyCfg);
+	}
+	
+	public static function initLog($runtimeLogDir, $actionLogDir){
+		TyiLog::init($runtimeLogDir, $actionLogDir);
 	}
 	
 	public static function run($tysDir){
@@ -48,7 +61,7 @@ class Tyi{
 			$tysOutput = $tys->getTysOutput();
 		} catch (TysException $e){
 			$tysOutput = $e->getTysOutput();
-			TyiHelperLog::runtime($e->getMessage(), TyiHelperLog::RUNTIME_LEVEL_ERROR);
+			TyiLog::runtime($e->getMessage(), TyiHelperLog::RUNTIME_LEVEL_ERROR);
 		}
 		
 		// step 4. output
