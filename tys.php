@@ -107,16 +107,6 @@ abstract class TysAbstract{
 		$this->process();
 	}
 	
-	protected function checkInput(){
-		$args = func_get_args();
-		foreach($args as $key){
-			$val = Tyi::input($key);
-			if( ! isset($val)){
-				self::halt(TysOutput::RET_ERROR, "tyi input error, no {$key} param");
-			}
-		}
-	}
-	
 	abstract protected function input();
 	abstract protected function process();
 }
