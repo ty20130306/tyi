@@ -29,6 +29,14 @@ class Tyi{
 		TyiLog::init($runtimeLogDir, $actionLogDir);
 	}
 	
+	public static function logRuntime($msg, $level = TyiLog::RUNTIME_LEVEL_DEBUG){
+		TyiLog::runtime($msg, $level);
+	}
+	
+	public static function logAction($msg){
+		TyiLog::action($msg, $level);
+	}
+	
 	public static function run($tysDir){
 		// step 1. input
 		switch($_SERVER['CONTENT_TYPE']){
