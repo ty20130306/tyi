@@ -3,6 +3,7 @@ require_once __DIR__ . '/input.php';
 require_once __DIR__ . '/output.php';
 require_once __DIR__ . '/tys.php';
 require_once __DIR__ . '/log.php';
+require_once __DIR__ . '/context.php';
 
 class TyiException extends Exception{
 	
@@ -11,6 +12,8 @@ class TyiException extends Exception{
 class Tyi{
 	private static $_inputHandler = null;
 	private static $_outputHandler = null;
+	
+	public static $ctx	= null;
 	
 	public static function input($name, $default = null){
 		return self::$_inputHandler->get($name, $default);
@@ -60,7 +63,10 @@ class Tyi{
 			throw new TyiException('interface file missing,file=' . $tysDir . '/' . $classPath);
 		}
 		
-		// step 3. run tys
+		// step 3. init tyi context
+		self::$ctx	= new TyiContext();
+		
+		// step 4. run tys
 		require_once $tysDir . '/' . $classPath;
 		$tys = new $className();
 		
@@ -72,7 +78,7 @@ class Tyi{
 			TyiLog::runtime($e->getMessage(), TyiLog::RUNTIME_LEVEL_ERROR);
 		}
 		
-		// step 4. output
+		// step 5. output
 		switch (TysOutput::getType()){
 			case TysOutput::TYPE_XML:
 				self::$_outputHandler = new TyiOutputHandlerXml();
