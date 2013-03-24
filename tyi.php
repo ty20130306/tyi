@@ -69,7 +69,7 @@ class Tyi{
 			$tysOutput = $tys->getTysOutput();
 		} catch (TysException $e){
 			$tysOutput = $e->getTysOutput();
-			TyiLog::runtime($e->getMessage(), TyiHelperLog::RUNTIME_LEVEL_ERROR);
+			TyiLog::runtime($e->getMessage(), TyiLog::RUNTIME_LEVEL_ERROR);
 		}
 		
 		// step 4. output
